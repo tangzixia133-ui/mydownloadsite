@@ -22,5 +22,8 @@ def download_file(filename):
     return send_from_directory(DOWNLOAD_FOLDER, filename, as_attachment=True)
 
 if __name__ == '__main__':
-    print(f"请将要下载的文件放入文件夹: {DOWNLOAD_FOLDER}")
-    app.run(debug=True, port=5000)
+    # 从环境变量获取端口，如果没有（比如在本地运行），则默认使用 8080
+    port = int(os.environ.get('PORT', 8080))
+    
+    # 这里的 host 必须是 '0.0.0.0'，port 必须使用变量
+    app.run(host='0.0.0.0', port=port)
